@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Boggle! {% endblock %}
+
+{% block content %}
+
+    <h1 id="title">Boggle!</h1>
+
+    <table id="board">
+    {% for y in boggle_board %}
+        <tr> 
+        {% for x in y %}
+            <td class="letter" id="{{boggle_board.index(y)}}-{{y.index(x)}}">{{x}}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    <div id="scoreboard" style="visibility: hidden">
+        <span>Score:</span>
+        <span id="score">0</span>
+        <span>
+            <h3>Remaining Time:</h3>
+        </span>
+        <span>
+            <h3 id="timer-el"></h3>
+        </span>
+    </div>
+    <div id="form-toggle">
+    
+    <form id="submit-guess" action="/check-word" method="post">
+        <input id="guess" type="text" autocomplete="off" placeholder="Guess" name="guess">
+        <button>Submit</button>
+    </form>
+
+    <form id="restart-game" style="visibility: hidden" action="/game-start">
+        <p>Start a new game!</p>
+        <button>Restart!</button>
+    </form>
+
+    </div>
+{% endblock %} 
